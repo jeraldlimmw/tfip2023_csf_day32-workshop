@@ -1,0 +1,19 @@
+<h2>To-Do List</h2>
+<div *ngIf="todoList.length > 0 else noTodo">
+    <table>
+        <tr *ngFor="let t of todoList; let i = index">
+            <td>{{ t.title }}</td>
+            <td>({{ t.tasks.length }})</td>
+            <td>
+                <button type="button" (click)="deleteSelected(i)">X</button>
+            </td>
+            <td>
+                <button type="button" (click)="editSelected(i)">Edit</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<ng-template #noTodo>
+    <code>(List is currently empty)</code>
+</ng-template>

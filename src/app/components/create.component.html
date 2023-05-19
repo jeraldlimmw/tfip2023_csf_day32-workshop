@@ -1,0 +1,61 @@
+<form [formGroup]="todoForm" (submit)="processForm()">
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td>
+                <input type="text" size="50" placeholder="Give these tasks a title" formControlName="title">
+            </td>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td>
+                <input type="text" size="30" placeholder="Name" formControlName="name">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <!-- <button type="submit">Save</button> shifted to parent html -->
+                <ng-content></ng-content>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" (click)="addTask()"> Add Task</button>
+            </td>
+            <td>
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <table *ngIf="tasksArray.length>0 else noTasks">
+        <thead>
+            <tr>
+                <td>Task</td>
+                <td>Priority</td>
+                <td>Due Date</td>
+            </tr>
+        </thead>
+        <tbody formArrayName="tasks">
+            <tr *ngFor="let t of tasksArray.controls; let i = index" [formGroupName]="i">
+                <td>
+                    <input type="text" size="30" formControlName="task">
+                </td>
+                <td>
+                    <input type="radio" value=1 formControlName="priority"> Low
+                    <input type="radio" value=2 formControlName="priority"> Med
+                    <input type="radio" value=3 formControlName="priority"> High
+                </td>
+                <td>
+                    <input type="datetime-local" formControlName="dueDate">
+                </td>
+                <td>
+                    <button type="button" (click)="removeTask(i)">X</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<ng-template #noTasks>
+    <h2>No tasks added yet</h2>
+</ng-template>

@@ -1,0 +1,16 @@
+<h1>To Do App</h1>
+
+<div class="container">
+  <app-create (onSave)="saveNewTodo($event)" [savedTodo]="todo">
+  <!-- template ref #createTodo -->
+  <!-- <app-create #todo> -->
+    <button type="submit">Save To-Do List</button>
+    <!-- <button type="button">Edit</button>
+    <button type="button">Delete</button> -->
+  </app-create>
+  
+  <div style="border: 1px solid grey">
+    <app-to-do-list [todoList]="todoArr" (onEditSelected)="getTodoFromList($event)" (onDeleteSelected)="deleteTodo($event)">
+    </app-to-do-list>
+  </div>
+</div>
